@@ -73,16 +73,16 @@ function saveTodo() {
     todoObj.title = todoDiv.children[0].innerText;
     todoObj.completed =
       todoDiv.children[0].style.textDecoration === "line-through";
-    data.unshift(todoObj);
+    data.push(todoObj);
     const dataStr = JSON.stringify(data);
     localStorage.setItem("todoListData", dataStr);
   }
   console.log(data);
 }
-
 function loadTodo() {
   const dataStr = localStorage.getItem("todoListData");
   const data = JSON.parse(dataStr);
+  data.reverse();
   for (const todoObj of data) {
     addTodo(todoObj.title, todoObj.completed);
   }
