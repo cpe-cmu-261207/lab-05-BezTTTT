@@ -12,8 +12,8 @@ inputAdd.onkeyup = (event) => {
   } else {
     addTodo(inputAdd.value, false);
   }
-  saveTodo();
   inputAdd.value = "";
+  saveTodo();
 };
 
 function addTodo(title, completed) {
@@ -40,6 +40,7 @@ function addTodo(title, completed) {
   div.appendChild(span);
   div.appendChild(doneBtn);
   div.appendChild(deleteBtn);
+
   deleteBtn.style.display = "none";
   doneBtn.style.display = "none";
   todoCtn.prepend(div);
@@ -70,7 +71,7 @@ function saveTodo() {
     todoObj.title = todoDiv.children[0].innerText;
     todoObj.completed =
       todoDiv.children[0].style.textDecoration === "line-through";
-    data.push(todoObj);
+    data.unshift(todoObj);
     const dataStr = JSON.stringify(data);
     localStorage.setItem("todoListData", dataStr);
   }
@@ -84,5 +85,4 @@ function loadTodo() {
     addTodo(todoObj.title, todoObj.completed);
   }
 }
-
 loadTodo();
